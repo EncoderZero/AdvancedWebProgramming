@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Browser" id="1" x="24" y="8" width="777" height="513" text="Browser&#xA;http://KevinKan" measuredWidth="777" measuredHeight="513"/>
+  <widgets xsi:type="model:Placeholder" id="5" x="34" y="70" width="135" height="115" text="LOGO" measuredWidth="135" measuredHeight="115"/>
+  <widgets xsi:type="model:Rectangle" id="6" x="34" y="192" width="135" height="297" measuredWidth="135" measuredHeight="297">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Rectangle" id="7" x="488" y="367" width="239" height="123" measuredWidth="239" measuredHeight="123">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Rectangle" id="8" x="10" y="10" measuredWidth="100" measuredHeight="100">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Placeholder" id="9" x="176" y="368" width="305" height="121" measuredWidth="305" measuredHeight="121"/>
+  <widgets xsi:type="model:Placeholder" id="10" x="208" y="192" width="473" height="161" measuredWidth="473" measuredHeight="161"/>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>
