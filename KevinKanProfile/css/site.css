@@ -1,23 +1,78 @@
 @CHARSET "utf-8";
-nav ul li{
-	list-style:none;
-	width:100%;
-	max-width:200px;
-	min-width:150px;
-	height:40px;
-	position:relative;
+/*Written By Kevin Kan
+ *Version Sept 26 2013
+ *This is the general site css
+*/
+/*Nav Styles*/
+nav ul li.activeNav{
+	background:#FFFFFF;/*White*/
+}
+#logoImg{
+	width: 15%;
+	max-width: 400px;
+	min-width: 100px;
+	height:auto;
+}
+nav {
+	background: #000000;/*Black*/
+	width: 15%;
+	max-width: 400px;
+	min-width: 100px;
+	height: 340px;
+	position: relative;
+}
+nav ul a li{
+	list-style: none;
+	width:95%;
+	max-width: 380px;
+	min-width: 90px;
+	height: 40px;
+	position: relative;
 	float: left;
-	border: 1px solid blue;
+	border: 1px solid #4646E2;/*off blue*/
 	border-radius: 5px;
-	background:blue;
+	background: #4646E2;/*off blue*/
+	margin: 2px 1.5%;
 }
 nav ul{
-	width:10%;
-	max-width:200px;
-	min-width:150px;
 	padding:0;
+	margin:0;
 }
-nav ul li a{
+nav ul a{
 	text-decoration: none;
 	color: black;
+	width: 95%;
+	max-width: 380px;
+	min-width: 90px;
+	height: 40px;
+}
+#socialMediaLinks{
+	border: 1px solid #000000;/*Black*/
+	border-radius: 5px;
+	position: relative;
+	float: right;
+	color: #FFFFFF;/*White*/
+	background:#000000;/*Black*/
+	width:5%;
+	min-width:150px;
+}
+#socialMediaLinks p {
+	width:100%;
+}
+#socialMediaLinks a{
+	position: relative;
+	float:left;
+}
+/*General Css*/
+
+/*Footer Css*/
+footer{
+	font-size:0.75em;
+}
+footer p{
+	margin: auto;
+	display: block;
+	position: relative;
+	width: 100%;
+	text-align: center;
 }
