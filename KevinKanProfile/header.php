@@ -11,7 +11,7 @@
 		$cssFiles=array("css/site.css");
 		$scriptFiles=array('http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js');
 		if ($currentPage=='index.php'){
-			//array_push($cssFiles,"css/homePage.css");
+			array_push($cssFiles,"css/homePage.css");
 			array_push($cssFiles,"css/nivo-slider.css");
 			array_push($scriptFiles,'jquery/jquery.nivo.slider.pack.js');
 			array_push($scriptFiles,'jquery/featuredWorkSlider.js');

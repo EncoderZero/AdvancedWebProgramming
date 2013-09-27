@@ -18,7 +18,7 @@ require_once 'header.php';
 			<a href='https://github.com/EncoderZero/WebPrograming'><img src='media/PHPCRUDFormImg.jpg'></a>
 			<a href='https://github.com/EncoderZero/MastermindProgramFinal'><img src='media/ArduinoImg.jpg'></a>
 		</div>
-		<input type='button' value='More Projects'/>
+		<a id='moreProjectsButton' href='projects.php'>More Projects</a>
 	</div>
 </div>
 <?php 
