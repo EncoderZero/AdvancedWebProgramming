@@ -4,7 +4,9 @@
 //The header file contains the company logo and nav bar
 require_once 'header.php';
 ?>
+<div class='pageContent'>
 
+</div>
 
 <?php 
 //footer file contains the closing to the body and document

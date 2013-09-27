@@ -11,10 +11,10 @@
 		$cssFiles=array("css/site.css");
 		$scriptFiles=array('http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js');
 		if ($currentPage=='index.php'){
-			array_push($cssFiles,"css/homePage.css");
+			//array_push($cssFiles,"css/homePage.css");
 			array_push($cssFiles,"css/nivo-slider.css");
-			array_push($scriptFiles,'jquery/featuredWorkSlider.js');
 			array_push($scriptFiles,'jquery/jquery.nivo.slider.pack.js');
+			array_push($scriptFiles,'jquery/featuredWorkSlider.js');
 		}
 		foreach($cssFiles as $fileName){
 			echo"<link rel='stylesheet' type='text/css' href='".$fileName."' media='screen' />";
@@ -26,8 +26,9 @@
 		
 	</head>
 	<body>
-		<img id='logoImg' src="media/logo.png" alt='Kevin Kan Logo'/>
+		
 		<nav> 
+			<img id='logoImg' src="media/logo.png" alt='Kevin Kan Logo'/>
 			<ul>
 				<a href='index.php'><li <?php echo ($currentPage=='index.php') ? "class='activeNav'":NULL;     ?>>Home</li></a>
 				<a href='aboutMe.php'><li <?php echo ($currentPage=='aboutMe.php') ? "class='activeNav'":NULL;   ?>>About Me</li></a>
@@ -38,7 +39,7 @@
 			</ul>
 			<div id='socialMediaLinks'>
 				<p>Stay Connected</p>
-				<a href='http://www.linkedin.com/pub/kevin-kan/76/632/318'><img scr='' alt='LinkedIN' /></a>
-				<a href='https://twitter.com/EncoderZero'><img scr='' alt='Twitter' /></a>
+				<a href='http://www.linkedin.com/pub/kevin-kan/76/632/318'><img src='media/linkedin_icon.png' alt='LinkedIN' /></a>
+				<a href='https://twitter.com/EncoderZero'><img src='media/twitter_icon.png' alt='Twitter' /></a>
 			</div>
 		</nav>

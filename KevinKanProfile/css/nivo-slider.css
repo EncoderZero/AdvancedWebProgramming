@@ -89,10 +89,12 @@
 }
 /* Direction nav styles (e.g. Next & Prev) */
 .nivo-directionNav a {
-	position:absolute;
-	top:45%;
-	z-index:9;
-	cursor:pointer;
+	position: absolute;
+	top: 40%;
+	z-index: 9;
+	cursor: pointer;
+	width: 5%;
+	min-width: 30px;
 }
 .nivo-prevNav {
 	left:0px;
@@ -110,4 +112,25 @@
 }
 .nivo-controlNav a.active {
 	font-weight:bold;
+}
+/***********************************Kevin Kan Addtions***************************************/
+.nivo-directionNav a img.slideNav{
+	position:relative;
+	width: 100%;
+}
+/*When the screen is smaller than 463px*/
+@media screen and (max-width:463px)
+{
+	.nivo-directionNav a img.slideNav{
+	position:relative;
+	top: 10%;
+	}
+	.nivo-directionNav a {
+	position: absolute;
+	top: 25%;
+	z-index: 9;
+	cursor: pointer;
+	width: 5%;
+	min-width: 30px;
+	}
 }
