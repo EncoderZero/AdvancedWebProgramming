@@ -26,34 +26,32 @@ if(isset($_POST['SEND'])){
 	$senderEmail=trim($_POST['senderEmail']);
 	$subject=trim($_POST['subject']);
 	$message=trim($_POST['message']);
-	$errorMessage+=(strlen($senderName)<2)?"<li>Your name must be larger than 2 charaters.</li>":"";
-	$errorMessage+=(preg_match('/^[0-9A-Za-z_()]+@[0-9A-Za-z_()]+.[a-zA-Z]{0,3}/',$senderEmail))?"<li>Email is invalid.</li>":"";
-	$errorMessage+=(empty($subject))?"<li>Subject is empty.</li>":"";
-	$errorMessage+=(empty($message))?"<li>Message is empty</li>":"";
-	if(trim($errorMessage)==""){
+	$errorMessage.=(strlen($senderName)<2)?"<li>Your name must be larger than 2 charaters.</li>":"";
+	$errorMessage.=(preg_match('/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Z]{2,4}/',$senderEmail))?"<li>Email is invalid.</li>":"";
+	$errorMessage.=(empty($subject))?"<li>Subject is empty.</li>":"";
+	$errorMessage.=(empty($message))?"<li>Message is empty</li>":"";
+	if(empty($errorMessage)){
 		$to='intrepidhonor@gmail.com';
 		mail($to, $subject, $message, 'From:' .$senderName.'<'. $senderEmail.'>');
 	}
-	else{
-		$errorMessage="<li>The email wasn't sent because...</li>";
-	}
 }
 ?>
-<form method="post" action="contactMe.php" enctype='multipart/form-data'>
+<form id='quickContact' method="post" action="contactMe.php" enctype='multipart/form-data'>
 	<fieldset>
-		<legend>Quick Contact Me</legend>
+		<legend>Quick Contact</legend>
 		<label for="senderName">Your name:</label>
-		<input type="text" id="senderName" name="senderName" value="<?php echo $senderName; ?>" required/><br />
+		<input type="text" id="senderName" name="senderName" value="<?php echo $senderName; ?>" required/>
 		<label for="senderEmail">Your Email:</label>
-		<input type="email" id="senderEmail" name="senderEmail" value="<?php echo $senderEmail;?>" required/><br />
+		<input type="email" id="senderEmail" name="senderEmail" value="<?php echo $senderEmail;?>" required/>
 		<label for="subject">Subject:</label>
-		<input type="text" id="subject" name="subject" value="<?php echo $subject;?>" required/><br />
+		<input type="text" id="subject" name="subject" value="<?php echo $subject;?>" required/>
 		<label for="message">Message:</label>
-		<textarea id="message" name="message" required><?php echo $message;?></textarea><br />
-		<input type="submit" value="SEND" name="SEND" />
-		<ul id='emailError'>
-			<?php echo $errorMessage;?>
-		</ul>
+		<textarea id="message" name="message" required><?php echo $message;?></textarea>
+		<input id='quickContactSubmit' type="submit" value="SEND" name="SEND" />
+		<?php 
+		if (!empty($errorMessage)){
+			 echo "<div id='emailError'>The email wasn't sent because... <ul>".$errorMessage."</ul></div>";
+		}?>
 	</fieldset>
 </form>	  
 

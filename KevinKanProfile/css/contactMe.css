@@ -1,9 +1,23 @@
 @CHARSET "utf-8";
-#moreProjectsButton{
-
+#quickContact{
+	width: 100%;
+	max-width: 400px;
+	min-width: 200px;
 }
-/*When the screen is smaller than 463px*/
-@media screen and (max-width:463px)
-{
-	#moreProjectsButton{font-size: 16px}
+#quickContact label,#quickContact input[type='text'],#quickContact input[type='email'],#quickContact textarea{
+	width:80%;
+	display: block;
+}
+#quickContact #quickContactSubmit{
+	float: right;
+}
+#emailError{
+	color:#F00;
+	border: 1px solid #F00;
+	display: block;
+	float: left;
+	width:100%;
+}
+#emailError ul{
+	margin:0;
 }
