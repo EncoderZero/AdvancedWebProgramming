@@ -1,0 +1,9 @@
+@CHARSET "utf-8";
+#moreProjectsButton{
+
+}
+/*When the screen is smaller than 463px*/
+@media screen and (max-width:463px)
+{
+	#moreProjectsButton{font-size: 16px}
+}

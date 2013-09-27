@@ -97,12 +97,22 @@ nav ul a{
 	}
 }
 /************************************General Css********************************************/
+li{
+	list-style: none;
+}
 .pageContent{
 	position: relative;
 	float: left;
 	width: 75%;
 	min-width: 100px;
 	padding: 0 0 0 1.5%;
+}
+/*When the screen is smaller than 463px*/
+@media screen and (max-width:463px)
+{
+	.pageContent{
+		width: 98%;
+	}
 }
 /***********************************Footer Css*************************************************/
 footer{
