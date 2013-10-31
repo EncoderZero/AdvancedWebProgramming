@@ -9,7 +9,7 @@ require_once 'header.php';
 <h2>Contact Information</h2>
 <ul>
 	<li>Email: intrepidhonor@gmail.com</li>
-	<li>Phone: (705)735-4158</li>
+	<li><a href='tel:7057354158'>Phone: (705)735-4158</a></li>
 	<li>Work: Student at Georgian College, no phone number</li>
 	<li>Postal Code: L4N 0C2</li>
 	<li>Address: 31 Russel Hill Dr. Barrie, Ontario , Canada </li>
