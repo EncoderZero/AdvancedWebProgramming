@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$_SESSION['forceDesktop']=false;
+$_SESSION['forceState']='none';
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,21 +17,35 @@ $_SESSION['forceDesktop']=false;
 		//get the current page name
 		$currentPage=preg_replace($fileTypes,'', basename($_SERVER['SCRIPT_NAME'])); 
 		//vars to hold all css and script files to be linked depending on script name with default common files on all pages
-		$cssFiles=array("css/site.css","//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css");
-		$scriptFiles=array('http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js','http://code.jquery.com/ui/1.10.3/jquery-ui.js');
+		$cssFiles=array("//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css");
+		$scriptFiles=array('http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js','http://code.jquery.com/ui/1.10.3/jquery-ui.js','jquery/generalJquery.js');
 		//check if mobile
 		$userString=strtoupper($_SERVER['HTTP_USER_AGENT']);
 		$listOfMobileUserAgents=array("/IPHONE/","/ANDROID/","/IPOD/","/BLACKBERRY/","/BLAZER/","/BOLT/", "/MOBILE/");
-		$isMobile=false;
-		foreach($listOfMobileUserAgents as $pattern){
-			echo $pattern."\n";
-			if (preg_match($pattern,$userString)==true){
-				$isMobile=true;
+		$isMobile=false;//set default state to be desktop
+		
+		if($_SESSION['forceState']==='none'){//if no overide state (as in not mobile requesting desktop)
+			foreach($listOfMobileUserAgents as $pattern){
+				echo $pattern."\n";
+				if (preg_match($pattern,$userString)==true){
+					$isMobile=true;
+				}
 			}
 		}
-		if($isMobile==true && $_SESSION['forceDesktop']==false){
-			array_push($cssFiles,"css/homePage.css");
+		elseif($_SESSION['forceState']==='mobile'){//if forced mobile state to mobile
+			$isMobile=true;
+		}
+		else{//if any other state request
+			$isMobile=false;//set to desktop
+		}
+		if(($isMobile==true){
+			//if the site accessed by mobile device and not foced into a different state or if forced into mobile
+			array_push($cssFiles,"css/mobileSite.css");
 			array_push($scriptFiles,'http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js');
+			array_push($scriptFiles,'jquery/mobileSite.js');
+		}
+		else{//display desktop stuff
+			array_push($cssFiles,"css/site.css");			
 		}
 		
 		if ($currentPage=='index'){//if home page
@@ -40,7 +54,7 @@ $_SESSION['forceDesktop']=false;
 			array_push($scriptFiles,'jquery/jquery.nivo.slider.pack.js');
 			array_push($scriptFiles,'jquery/featuredWorkSlider.js');
 		}
-		elseif ($currentPage!='services'){//if services page
+		elseif ($currentPage!='services'){//if not services page (services page only one without specific css)
 			array_push($cssFiles,"css/".trim($currentPage).".css");
 		}
 		//add external css
