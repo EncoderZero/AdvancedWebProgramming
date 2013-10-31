@@ -40,6 +40,7 @@ $_SESSION['forceState']='none';
 		}
 		if(($isMobile==true){
 			//if the site accessed by mobile device and not foced into a different state or if forced into mobile
+			array_push($cssFiles,"css/themes/themeRollerCustom.min.css");
 			array_push($cssFiles,"css/mobileSite.css");
 			array_push($scriptFiles,'http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js');
 			array_push($scriptFiles,'jquery/mobileSite.js');
@@ -59,7 +60,7 @@ $_SESSION['forceState']='none';
 		}
 		//add external css
 		foreach($cssFiles as $fileName){
-			echo"<link rel='stylesheet' type='text/css' href='".$fileName."' media='screen' rel='stylesheet' />";
+			echo"<link rel='stylesheet' type='text/css' href='".$fileName."' media='screen' />";
 		}
 		//add external scripts
 		foreach($scriptFiles as $scriptName){
