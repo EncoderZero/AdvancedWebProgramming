@@ -1,6 +1,7 @@
 <?php 
 session_start();
 $_SESSION['forceState']='none';
+echo $_SESSION['forceState'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +27,6 @@ $_SESSION['forceState']='none';
 		
 		if($_SESSION['forceState']==='none'){//if no overide state (as in not mobile requesting desktop)
 			foreach($listOfMobileUserAgents as $pattern){
-				echo $pattern."\n";
 				if (preg_match($pattern,$userString)==true){
 					$isMobile=true;
 				}
@@ -38,9 +38,10 @@ $_SESSION['forceState']='none';
 		else{//if any other state request
 			$isMobile=false;//set to desktop
 		}
-		if(($isMobile==true){
+		if($isMobile==true){
 			//if the site accessed by mobile device and not foced into a different state or if forced into mobile
 			array_push($cssFiles,"css/themes/themeRollerCustom.min.css");
+			array_push($cssFiles,"http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css");
 			array_push($cssFiles,"css/mobileSite.css");
 			array_push($scriptFiles,'http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js');
 			array_push($scriptFiles,'jquery/mobileSite.js');
@@ -60,11 +61,11 @@ $_SESSION['forceState']='none';
 		}
 		//add external css
 		foreach($cssFiles as $fileName){
-			echo"<link rel='stylesheet' type='text/css' href='".$fileName."' media='screen' />";
+			echo"<link rel='stylesheet' type='text/css' href='".$fileName."' media='screen' /> \n";
 		}
 		//add external scripts
 		foreach($scriptFiles as $scriptName){
-			echo"<script src='".$scriptName."' type='text/javascript'></script>";
+			echo"<script src='".$scriptName."' type='text/javascript'></script> \n";
 		}
 		?>
 		
@@ -74,7 +75,7 @@ $_SESSION['forceState']='none';
 		<nav> 
 			<img id='logoImg' src="media/logo.png" alt='Kevin Kan Logo'/>
 			<ul>
-				<a href='index.php'><li <?php echo ($currentPage=='index') ? "class='activeNav'":NULL;     ?>>Home</li> <i class="fa fa-home fa-fw"></i></a>
+				<a href='index.php'><li <?php echo ($currentPage=='index') ? "class='activeNav'":NULL;     ?>>Home<i class="fa fa-home fa-fw"></i></li></a>
 				<a href='aboutMe.php'><li <?php echo ($currentPage=='aboutMe') ? "class='activeNav'":NULL;   ?>>About Me<i class="fa fa-smile-o fa-fw"></i></li></a>
 				<a href='projects.php'><li <?php echo ($currentPage=='projects') ? "class='activeNav'":NULL;  ?>>Projects <i class="fa fa-trophy fa-fw"></i></li></a>
 				<a href='services.php'><li <?php echo ($currentPage=='services') ? "class='activeNav'":NULL;  ?>>Services <i class="fa fa-suitcase fa-fw"></i></li></a>
