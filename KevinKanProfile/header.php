@@ -1,14 +1,15 @@
 <?php 
 session_start();
-$_SESSION['forceState']='none';
-echo $_SESSION['forceState'];
+$_SESSION['forceState'];
+//debug session state
+//echo $_SESSION['forceState'];
 ?>
 <!DOCTYPE html>
 <html>
 <!-- Written By: Kevin Kan
 	Header File to be included in all files
 	Handels Navigation menu and company logo.
-	also handels current navigation menu -->
+	also handles current navigation menu -->
 	<head>
 		<title>Kevin Kan's Profile</title>
 		<meta charset='utf-8' />
@@ -25,7 +26,7 @@ echo $_SESSION['forceState'];
 		$listOfMobileUserAgents=array("/IPHONE/","/ANDROID/","/IPOD/","/BLACKBERRY/","/BLAZER/","/BOLT/", "/MOBILE/");
 		$isMobile=false;//set default state to be desktop
 		
-		if($_SESSION['forceState']==='none'){//if no overide state (as in not mobile requesting desktop)
+		if(($_SESSION['forceState']!='desktop')&&($_SESSION['forceState']!='mobile')){//if no overide state (as in not mobile requesting desktop)
 			foreach($listOfMobileUserAgents as $pattern){
 				if (preg_match($pattern,$userString)==true){
 					$isMobile=true;
@@ -38,8 +39,9 @@ echo $_SESSION['forceState'];
 		else{//if any other state request
 			$isMobile=false;//set to desktop
 		}
+		
 		if($isMobile==true){
-			//if the site accessed by mobile device and not foced into a different state or if forced into mobile
+			//if the site accessed by mobile device and not forced into a different state or if forced into mobile
 			array_push($cssFiles,"css/themes/themeRollerCustom.min.css");
 			array_push($cssFiles,"http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css");
 			array_push($cssFiles,"css/mobileSite.css");
@@ -71,10 +73,15 @@ echo $_SESSION['forceState'];
 		
 	</head>
 	<body>
-		
-		<nav> 
+		<?php if($isMobile){?>
+			<button id='toggleNav'>Show Navigation</button>
+		<?php }?>
+		<nav id='siteNav'> 
 			<img id='logoImg' src="media/logo.png" alt='Kevin Kan Logo'/>
 			<ul>
+				<?php if($isMobile){?>
+					<a href='index.php' data-rel="back"><li>Back<i class="fa fa-arrow-circle-left"></i></li></a>
+				<?php }?>
 				<a href='index.php'><li <?php echo ($currentPage=='index') ? "class='activeNav'":NULL;     ?>>Home<i class="fa fa-home fa-fw"></i></li></a>
 				<a href='aboutMe.php'><li <?php echo ($currentPage=='aboutMe') ? "class='activeNav'":NULL;   ?>>About Me<i class="fa fa-smile-o fa-fw"></i></li></a>
 				<a href='projects.php'><li <?php echo ($currentPage=='projects') ? "class='activeNav'":NULL;  ?>>Projects <i class="fa fa-trophy fa-fw"></i></li></a>
