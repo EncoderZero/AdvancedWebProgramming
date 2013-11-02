@@ -42,8 +42,8 @@ $_SESSION['forceState'];
 		
 		if($isMobile==true){
 			//if the site accessed by mobile device and not forced into a different state or if forced into mobile
-			array_push($cssFiles,"css/themes/themeRollerCustom.min.css");
 			array_push($cssFiles,"http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css");
+			array_push($cssFiles,"css/themes/themeRollerCustom.min.css");
 			array_push($cssFiles,"css/mobileSite.css");
 			array_push($scriptFiles,'http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js');
 			array_push($scriptFiles,'jquery/mobileSite.js');
