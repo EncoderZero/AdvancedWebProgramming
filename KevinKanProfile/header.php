@@ -74,18 +74,18 @@ $_SESSION['forceState'];
 	</head>
 	<body>
 		<?php if($isMobile){?>
-			<button id='toggleNav'>Show Navigation</button>
+			<button id='toggleNav'>Show/Hide Navigation</button>
 		<?php }?>
 		<nav id='siteNav'> 
 			<img id='logoImg' src="media/logo.png" alt='Kevin Kan Logo'/>
 			<ul>
 				<?php if($isMobile){?>
-					<a href='index.php' data-rel="back"><li>Back<i class="fa fa-arrow-circle-left"></i></li></a>
+					<a href='index.php' data-rel="back"><li>Back<i class="fa fa-arrow-circle-left fa-fw"></i></li></a>
 				<?php }?>
 				<a href='index.php'><li <?php echo ($currentPage=='index') ? "class='activeNav'":NULL;     ?>>Home<i class="fa fa-home fa-fw"></i></li></a>
 				<a href='aboutMe.php'><li <?php echo ($currentPage=='aboutMe') ? "class='activeNav'":NULL;   ?>>About Me<i class="fa fa-smile-o fa-fw"></i></li></a>
-				<a href='projects.php'><li <?php echo ($currentPage=='projects') ? "class='activeNav'":NULL;  ?>>Projects <i class="fa fa-trophy fa-fw"></i></li></a>
-				<a href='services.php'><li <?php echo ($currentPage=='services') ? "class='activeNav'":NULL;  ?>>Services <i class="fa fa-suitcase fa-fw"></i></li></a>
+				<a href='projects.php' class='projectNav'><li <?php echo ($currentPage=='projects') ? "class='activeNav'":NULL;  ?>><?php echo ($isMobile)?"<i class='fa fa-folder-open-o fa-fw fa-3x' alt='Projects'></i>":"Projects <i class='fa fa-folder-open-o fa-fw'></i>"; ?></li></a>
+				<a href='services.php' class='serviceNav'><li <?php echo ($currentPage=='services') ? "class='activeNav'":NULL;  ?>><?php echo ($isMobile)?"<i class='fa fa-cogs fa-fw fa-3x' alt='Services'></i>":"Services <i class='fa fa-cogs fa-fw' ></i>";?></li></a>
 				<a href='https://github.com/EncoderZero/'><li>GitHub<i class="fa fa-github fa-fw"></i> </li></a>
 				<a href='contactMe.php'><li <?php echo ($currentPage=='contactMe') ? "class='activeNav'":NULL; ?>>Contact Me <i class="fa fa-phone fa-fw"></i></li></a>
 			</ul>
