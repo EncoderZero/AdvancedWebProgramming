@@ -3,8 +3,25 @@
  *Version OCT 31 2013
  *This is the general mobile site css
 */
+/*********************************************Header Styles**************************************/
+#logIntoSite {
+	float: right;
+	font-size: 16px;
+	border-radius: 9px;
+	padding: 3px;
+	min-width:150px;
+	height: 30px;
+}
+#logIntoSite a{
+	text-decoration: none;
+}
+
 html{
 	font-family: 'Times New Roman',sans-serif;
+}
+/*********************************************Nav Styles*****************************************/
+#businessContactNav{
+	font-size:25px;
 }
 #logoImg{
 	width: 100%;

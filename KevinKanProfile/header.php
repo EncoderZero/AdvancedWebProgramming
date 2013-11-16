@@ -9,7 +9,7 @@ $fileTypes=array("/.php$/","/.html$/");
 //get the current page name
 $currentPage=preg_replace($fileTypes,'', basename($_SERVER['SCRIPT_NAME']));
 require_once 'scripts/databaseConnection.php';
-if($currentPage=='businessContacts'){
+if($currentPage=='businessContacts'){//if business contacts page check if valid user else redirect to login page
 	if((empty($_SESSION['userName']))||(empty($_SESSION['passWord']))){
 		$host  = $_SERVER['HTTP_HOST'];
 		$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
@@ -20,7 +20,12 @@ if($currentPage=='businessContacts'){
 }
 if($currentPage=="login"){
 	$userName="";
-	$loginFailMessage="";
+	$loginMessage="";
+	if(!empty($_SESSION['userName'])&&!empty($_SESSION['passWord'])){
+		$loginMessage= "<p>You've just logged out, log back in?</p>";
+		$_SESSION['userName']="";
+		$_SESSION['passWord']="";
+	}
 	if(isset($_POST['submit'])){
 		$password= sha1($_POST['password'].$_POST['userName']);
 		$userName= $_POST['userName'];
@@ -39,7 +44,7 @@ if($currentPage=="login"){
 		else{
 			$_SESSION['passWord']="";
 			$_SESSION['userName']="";
-			$loginFailMessage="The user name and or password is incorrect. Please try again.";
+			$loginMessage="The user name and or password is incorrect. Please try again.";
 		}
 	}
 }
@@ -111,14 +116,12 @@ if($currentPage=="login"){
 		?>
 		
 	</head>
-	<header><div id='logIntoSite'><?php 
-		if (!empty($_SESSION['userName'])){echo "Welcome ".$_SESSION['userName']." <a href='login.php'>Sign Out?</a>";} else {echo "<a href='login.php'>Login</a>";}
+	<header><div id='logIntoSite' data-role="header"><?php 
+	if($isMobile){echo"<button id='toggleNav'>Show/Hide Navigation</button>\n";}
+		if (!empty($_SESSION['userName'])){echo "Welcome ".$_SESSION['userName'].", <a href='login.php'>Sign Out?</a>";} else {echo "<a href='login.php'>Login</a>";}
 		?>
 	</div></header>
 	<body>
-		<?php if($isMobile){?>
-			<button id='toggleNav'>Show/Hide Navigation</button>
-		<?php }?>
 		<nav id='siteNav'> 
 			<img id='logoImg' src="media/logo.png" alt='Kevin Kan Logo'/>
 			<ul>
@@ -131,7 +134,7 @@ if($currentPage=="login"){
 				<a href='services.php' class='serviceNav'><li <?php echo ($currentPage=='services') ? "class='activeNav'":NULL;  ?>><?php echo ($isMobile)?"<i class='fa fa-cogs fa-fw fa-3x' alt='Services'></i>":"Services <i class='fa fa-cogs fa-fw' ></i>";?></li></a>
 				<a href='https://github.com/EncoderZero/'><li>GitHub<i class="fa fa-github fa-fw"></i> </li></a>
 				<a href='contactMe.php'><li <?php echo ($currentPage=='contactMe') ? "class='activeNav'":NULL; ?>>Contact Me <i class="fa fa-phone fa-fw"></i></li></a>
-				<a href='businessContacts.php'><li <?php echo ($currentPage=='businessContacts'||$currentPage=='login') ? "class='activeNav'":NULL; ?>>Business Contacts <i class="fa fa-group fa-fw"></i></li></a>
+				<a href='businessContacts.php'><li id='businessContactNav' <?php echo ($currentPage=='businessContacts'||$currentPage=='login') ? "class='activeNav'":NULL; ?>>Business Contacts <i class="fa fa-group fa-fw"></i></li></a>
 			</ul>
 			<div id='socialMediaLinks'>
 				<p>Stay Connected</p>
