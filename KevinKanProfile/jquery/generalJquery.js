@@ -27,4 +27,9 @@ $(document).ready(function() {
 	$("#signUpButton").click(function(){
 		$("#signUpForm").slideToggle('slow');//toggles the show hide of signup form
 	})
+	$(".contactInfo").hide();
+	$(".contactName").click(function(){
+		$(this).siblings(".contactInfo").slideToggle('slow');
+	})
+	
 })

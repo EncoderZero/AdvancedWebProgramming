@@ -111,8 +111,10 @@ if($currentPage=="login"){
 		?>
 		
 	</head>
-	<header><?php 
-	if (!empty($_SESSION['userName'])){echo "Welcome ".$_SESSION['userName']." <a href='login.php'>Sign Out?</a>";} else {echo "<a href='login.php'>Login</a>";}?></header>
+	<header><div id='logIntoSite'><?php 
+		if (!empty($_SESSION['userName'])){echo "Welcome ".$_SESSION['userName']." <a href='login.php'>Sign Out?</a>";} else {echo "<a href='login.php'>Login</a>";}
+		?>
+	</div></header>
 	<body>
 		<?php if($isMobile){?>
 			<button id='toggleNav'>Show/Hide Navigation</button>
@@ -129,7 +131,7 @@ if($currentPage=="login"){
 				<a href='services.php' class='serviceNav'><li <?php echo ($currentPage=='services') ? "class='activeNav'":NULL;  ?>><?php echo ($isMobile)?"<i class='fa fa-cogs fa-fw fa-3x' alt='Services'></i>":"Services <i class='fa fa-cogs fa-fw' ></i>";?></li></a>
 				<a href='https://github.com/EncoderZero/'><li>GitHub<i class="fa fa-github fa-fw"></i> </li></a>
 				<a href='contactMe.php'><li <?php echo ($currentPage=='contactMe') ? "class='activeNav'":NULL; ?>>Contact Me <i class="fa fa-phone fa-fw"></i></li></a>
-				<a href='businessContacts.php'><li <?php echo ($currentPage=='businessContacts') ? "class='activeNav'":NULL; ?>>Business Contacts <i class="fa fa-group fa-fw"></i></li></a>
+				<a href='businessContacts.php'><li <?php echo ($currentPage=='businessContacts'||$currentPage=='login') ? "class='activeNav'":NULL; ?>>Business Contacts <i class="fa fa-group fa-fw"></i></li></a>
 			</ul>
 			<div id='socialMediaLinks'>
 				<p>Stay Connected</p>

@@ -21,28 +21,34 @@ if(isset($_POST['signup'])){
 	else {echo "<p>This user name is already taken</p>";}
 }
 ?>
-<div id="loginForm">
+<div class='pageContent'>
+<h2>Login To Kevin Kan's Profile</h2>
+<div id="loginSignOutForms">
 	<?php echo (empty($loginFailMessage))?"<p>Please login or sign up to see my business contacts.</p>":"<p>$loginFailMessage</p>";?>
 	<form action="login.php" method="post" enctype="multipart/form-data" >
 	<fieldset>
 	<legend>Login</legend>
 		<label for = 'userName'>User Name:</label> 
-		<input name='userName' type="text" required="required" value="<?php echo $userName;?>"/>
+		<input name='userName' type="text" required="required" value="<?php echo $userName;?>"/><br>
 		<label for = 'password'>Password:</label>
-		<input name='password' type="password" required="required"/>
+		<input name='password' type="password" required="required"/><br>
 		<input name='submit' type="submit">
 	</fieldset>
 	</form>
-	<button id='signUpButton'>Sign Up</button>
+	<div id="signUpControls">
+		<p>If you don't have an account click on the Sign Up button below!</p><br>
+		<button id='signUpButton'>Sign Up</button>
+	</div>
 	<form id='signUpForm' name="signup" action="login.php" method="post" enctype="multipart/form-data" >
 	<fieldset id="signUpForm">
 	<legend>Sign Up</legend>
 		<label for = 'userNameSignUp'>User Name:</label> 
-		<input name='userNameSignUp' type="text" required="required" value=""/>
+		<input name='userNameSignUp' type="text" required="required" value=""/><br>
 		<label for = 'passwordSignUp'>Password:</label>
-		<input name='passwordSignUp' type="password" required="required"/>
+		<input name='passwordSignUp' type="password" required="required"/><br>
 		<input name='signup' type="submit">
 	</fieldset>
 	</form>
+</div>
 </div>
 <?php require_once 'footer.php';?>

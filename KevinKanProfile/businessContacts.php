@@ -6,9 +6,10 @@
 require_once 'header.php';
 $query = $database->prepare("SELECT * FROM  businesscontacts ORDER BY contactname");
 $query->execute();
+echo"<div class='pageContent'>";
 while ($row = $query->fetch(PDO::FETCH_ASSOC))
 {
-	echo "<div class='contactName'>".$row['contactname'];
+	echo "<div class='contactList'><h3 class='contactName'>".$row['contactname']."</h3>";
 			echo "<ul class='contactInfo'>";
 				echo "<li>Telephone: <a href='tel:".$row['phonenumber']."'>".$row['phonenumber']."</a></li>";
 				echo "<li>Address: ".$row['address']."</li>";
@@ -16,6 +17,7 @@ while ($row = $query->fetch(PDO::FETCH_ASSOC))
 			echo "</ul>";
 	echo"</div>";
 }
+echo"</div>";
 require_once 'footer.php';
 ?>
 

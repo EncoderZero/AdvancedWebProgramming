@@ -1,0 +1,11 @@
+@CHARSET "utf-8";
+/*Written By Kevin Kan
+ *Version Nov 16 2013
+ *This is the login page css
+*/
+#loginSignOutForms{
+	width: 60%;
+	margin: auto;
+	font-size: 20px;
+	min-width: 350px;
+}

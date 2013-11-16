@@ -1,0 +1,25 @@
+@CHARSET "utf-8";
+/*Written By Kevin Kan
+ *Version Nov 16 2013
+ *This is the business contacts page css
+*/
+.contactInfo{
+	margin-top: 0;
+	font-size: 20px;
+}
+.contactName{
+	color: white;
+	background: black;
+	border: 2px solid black;
+	border-radius: 9px;
+	width: 60%;
+	clear: both;
+	height: 30px;
+	font-size: 25px;
+	margin: 1px;
+	cursor:pointer;
+}
+.contactList{
+	clear:both;
+	position: relative;
+}
