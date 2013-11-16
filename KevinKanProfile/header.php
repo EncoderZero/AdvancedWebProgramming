@@ -1,23 +1,50 @@
 <?php 
 session_start();
 $_SESSION['forceState'];
-//debug session state
-//echo $_SESSION['forceState'];
+$_SESSION['password'];
+$_SESSION['userName'];
+//array of file types to parse for
+$fileTypes=array("/.php$/","/.html$/");
+//get the current page name
+$currentPage=preg_replace($fileTypes,'', basename($_SERVER['SCRIPT_NAME']));
+require_once 'scripts/databaseConnections.php';
+if($currentPage=="businessContacts"){
+	$loginFail=true;
+	if((!empty($_SESSION['userName']))&&(!empty($_SESSION['password']))){
+		$loginFail=false;
+	}
+	elseif((!empty($_POST['userName']))&&(!empty($_POST['password']))){
+		$password= sha1($_POST['password'].$_POST['userName']);
+		$query="SELECT * FROM kkprofileusers WHERE username= $_POST['userName'] AND password = $password";
+		$query->execute();
+		$rows=$query->fetch(PDO::FETCH_NUM);
+		if ($rows>0){
+			$_SESSION['userName']=$_POST['userName'];
+			$_SESSION['password']=$_POST['password'];
+			$loginFail=false;
+			$host  = $_SERVER['HTTP_HOST'];
+			$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+			$page = 'businessContacts.php';
+			header("Location: http://$host$uri/$page");
+		}
+		else{
+			$loginFail=true;
+			$_SESSION['password']="";
+		}
+	}
+}
 ?>
 <!DOCTYPE html>
 <html>
 <!-- Written By: Kevin Kan
 	Header File to be included in all files
 	Handels Navigation menu and company logo.
-	also handles current navigation menu -->
+	also handles current navigation menu 
+	Also Creates and stores session data for passing force state of site layout and login credentials-->
 	<head>
 		<title>Kevin Kan's Profile</title>
 		<meta charset='utf-8' />
 		<?php
-		//array of file types to parse for
-		$fileTypes=array("/.php$/","/.html$/");
-		//get the current page name
-		$currentPage=preg_replace($fileTypes,'', basename($_SERVER['SCRIPT_NAME'])); 
 		//vars to hold all css and script files to be linked depending on script name with default common files on all pages
 		$cssFiles=array("//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css");
 		$scriptFiles=array('http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js','http://code.jquery.com/ui/1.10.3/jquery-ui.js','jquery/generalJquery.js');
@@ -45,8 +72,10 @@ $_SESSION['forceState'];
 			array_push($cssFiles,"http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css");
 			array_push($cssFiles,"css/themes/themeRollerCustom.min.css");
 			array_push($cssFiles,"css/mobileSite.css");
-			array_push($scriptFiles,'http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js');
+			//push in js files
 			array_push($scriptFiles,'jquery/mobileSite.js');
+			array_push($scriptFiles,'http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js');
+			
 		}
 		else{//display desktop stuff
 			array_push($cssFiles,"css/site.css");			
@@ -72,6 +101,7 @@ $_SESSION['forceState'];
 		?>
 		
 	</head>
+	<header><?php if ($_SESSION['password']!=""&&$_SESSION['userName']!=""){echo "Welcome".$_SESSION['userName']; else {echo "<a href='login.php'>Login</a>";}}?></header>
 	<body>
 		<?php if($isMobile){?>
 			<button id='toggleNav'>Show/Hide Navigation</button>

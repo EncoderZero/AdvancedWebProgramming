@@ -1,3 +1,7 @@
+/*Author Kevin Kan
+ * Version 1
+ * jquery ajax calls to call php session varriable for changes of desktop or mobile state.
+ */
 $(document).ready(function() {
 	$("#toggleMobileDesktop").click(function(){
 		var value = $("#toggleMobileDesktop").attr('value');

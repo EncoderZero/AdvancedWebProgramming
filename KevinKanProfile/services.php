@@ -2,6 +2,7 @@
 //Written By: Kevin Kan
 //Require the header file once (to ensure it doesn't appear multiple times.
 //The header file contains the company logo and nav bar
+//This page is the services I offer
 require_once 'header.php';
 ?>
 <!-- Page Content -->
