@@ -22,8 +22,7 @@ if(isset($_POST['signup'])){
 }
 ?>
 <div id="loginForm">
-	<?php if($loginFail){echo "<p =class'loginFail'>User Name or Password was incorrect please try again</p>";} else{echo "<p>Please Login to view my Business Contacts page.</p>";} ?>
-	<
+	<?php echo (empty($loginFailMessage))?"<p>Please login or sign up to see my business contacts.</p>":"<p>$loginFailMessage</p>";?>
 	<form action="login.php" method="post" enctype="multipart/form-data" >
 	<fieldset>
 	<legend>Login</legend>
@@ -34,9 +33,9 @@ if(isset($_POST['signup'])){
 		<input name='submit' type="submit">
 	</fieldset>
 	</form>
-	
+	<button id='signUpButton'>Sign Up</button>
 	<form id='signUpForm' name="signup" action="login.php" method="post" enctype="multipart/form-data" >
-	<fieldset>
+	<fieldset id="signUpForm">
 	<legend>Sign Up</legend>
 		<label for = 'userNameSignUp'>User Name:</label> 
 		<input name='userNameSignUp' type="text" required="required" value=""/>
@@ -46,3 +45,4 @@ if(isset($_POST['signup'])){
 	</fieldset>
 	</form>
 </div>
+<?php require_once 'footer.php';?>

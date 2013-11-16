@@ -10,9 +10,9 @@ while ($row = $query->fetch(PDO::FETCH_ASSOC))
 {
 	echo "<div class='contactName'>".$row['contactname'];
 			echo "<ul class='contactInfo'>";
-				echo "<li>Telephone: <a href='tel:".$row['phonenumber']."'>$row['phonenumber']</a></li>".
-				echo "<li>Address: ".$row['address']."</li>"
-				echo "<li>E-mail: ".$row['email']."</li>"
+				echo "<li>Telephone: <a href='tel:".$row['phonenumber']."'>".$row['phonenumber']."</a></li>";
+				echo "<li>Address: ".$row['address']."</li>";
+				echo "<li>E-mail: ".$row['email']."</li>";
 			echo "</ul>";
 	echo"</div>";
 }

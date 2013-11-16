@@ -22,4 +22,9 @@ $(document).ready(function() {
 				}
 			})
 	})//end click of toggleMobileDesktop
+	//initialy hide signup area
+	$("#signUpForm").hide();
+	$("#signUpButton").click(function(){
+		$("#signUpForm").slideToggle('slow');//toggles the show hide of signup form
+	})
 })

@@ -2,22 +2,26 @@
 session_set_cookie_params(0);
 session_start();
 $_SESSION['forceState'];
-$_SESSION['userName']="";
-$_SESSION['passWord']="";
+$_SESSION['userName'];
+$_SESSION['passWord'];
 //array of file types to parse for
 $fileTypes=array("/.php$/","/.html$/");
 //get the current page name
 $currentPage=preg_replace($fileTypes,'', basename($_SERVER['SCRIPT_NAME']));
 require_once 'scripts/databaseConnection.php';
+if($currentPage=='businessContacts'){
+	if((empty($_SESSION['userName']))||(empty($_SESSION['passWord']))){
+		$host  = $_SERVER['HTTP_HOST'];
+		$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+		$page = 'login.php';
+		header("Location: http://$host$uri/$page");
+		exit();
+	}
+}
 if($currentPage=="login"){
 	$userName="";
-	$loginFail=true;
-	if((!empty($_SESSION['userName']))&&(!empty($_SESSION['passWord']))){
-		$loginFail=false;
-		echo "Set Password";
-		echo $_SESSION['passWord'];
-	}
-	elseif(isset($_POST['submit'])){
+	$loginFailMessage="";
+	if(isset($_POST['submit'])){
 		$password= sha1($_POST['password'].$_POST['userName']);
 		$userName= $_POST['userName'];
 		$query=$database->prepare("SELECT * FROM kkprofileusers WHERE username=\"".$_POST['userName']."\" AND password =\"".$password."\"");
@@ -26,16 +30,16 @@ if($currentPage=="login"){
 		if ($rows>0){
 			$_SESSION['userName']=$_POST['userName'];
 			$_SESSION['passWord']=$_POST['password'];
-			$loginFail=false;
 			$host  = $_SERVER['HTTP_HOST'];
 			$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 			$page = 'businessContacts.php';
 			header("Location: http://$host$uri/$page");
+			exit();
 		}
 		else{
-			$loginFail=true;
 			$_SESSION['passWord']="";
 			$_SESSION['userName']="";
+			$loginFailMessage="The user name and or password is incorrect. Please try again.";
 		}
 	}
 }
@@ -107,7 +111,8 @@ if($currentPage=="login"){
 		?>
 		
 	</head>
-	<header><?php if (!empty($_SESSION['userName'])){echo "Welcome".$_SESSION['userName']." <a href='login.php'>Sign Out</a>";} else {echo "<a href='login.php'>Login</a>";}?></header>
+	<header><?php 
+	if (!empty($_SESSION['userName'])){echo "Welcome ".$_SESSION['userName']." <a href='login.php'>Sign Out?</a>";} else {echo "<a href='login.php'>Login</a>";}?></header>
 	<body>
 		<?php if($isMobile){?>
 			<button id='toggleNav'>Show/Hide Navigation</button>
@@ -124,6 +129,7 @@ if($currentPage=="login"){
 				<a href='services.php' class='serviceNav'><li <?php echo ($currentPage=='services') ? "class='activeNav'":NULL;  ?>><?php echo ($isMobile)?"<i class='fa fa-cogs fa-fw fa-3x' alt='Services'></i>":"Services <i class='fa fa-cogs fa-fw' ></i>";?></li></a>
 				<a href='https://github.com/EncoderZero/'><li>GitHub<i class="fa fa-github fa-fw"></i> </li></a>
 				<a href='contactMe.php'><li <?php echo ($currentPage=='contactMe') ? "class='activeNav'":NULL; ?>>Contact Me <i class="fa fa-phone fa-fw"></i></li></a>
+				<a href='businessContacts.php'><li <?php echo ($currentPage=='businessContacts') ? "class='activeNav'":NULL; ?>>Business Contacts <i class="fa fa-group fa-fw"></i></li></a>
 			</ul>
 			<div id='socialMediaLinks'>
 				<p>Stay Connected</p>
