@@ -1,26 +1,31 @@
 <?php 
+session_set_cookie_params(0);
 session_start();
 $_SESSION['forceState'];
-$_SESSION['password'];
-$_SESSION['userName'];
+$_SESSION['userName']="";
+$_SESSION['passWord']="";
 //array of file types to parse for
 $fileTypes=array("/.php$/","/.html$/");
 //get the current page name
 $currentPage=preg_replace($fileTypes,'', basename($_SERVER['SCRIPT_NAME']));
-require_once 'scripts/databaseConnections.php';
-if($currentPage=="businessContacts"){
+require_once 'scripts/databaseConnection.php';
+if($currentPage=="login"){
+	$userName="";
 	$loginFail=true;
-	if((!empty($_SESSION['userName']))&&(!empty($_SESSION['password']))){
+	if((!empty($_SESSION['userName']))&&(!empty($_SESSION['passWord']))){
 		$loginFail=false;
+		echo "Set Password";
+		echo $_SESSION['passWord'];
 	}
-	elseif((!empty($_POST['userName']))&&(!empty($_POST['password']))){
+	elseif(isset($_POST['submit'])){
 		$password= sha1($_POST['password'].$_POST['userName']);
-		$query="SELECT * FROM kkprofileusers WHERE username= $_POST['userName'] AND password = $password";
+		$userName= $_POST['userName'];
+		$query=$database->prepare("SELECT * FROM kkprofileusers WHERE username=\"".$_POST['userName']."\" AND password =\"".$password."\"");
 		$query->execute();
 		$rows=$query->fetch(PDO::FETCH_NUM);
 		if ($rows>0){
 			$_SESSION['userName']=$_POST['userName'];
-			$_SESSION['password']=$_POST['password'];
+			$_SESSION['passWord']=$_POST['password'];
 			$loginFail=false;
 			$host  = $_SERVER['HTTP_HOST'];
 			$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
@@ -29,7 +34,8 @@ if($currentPage=="businessContacts"){
 		}
 		else{
 			$loginFail=true;
-			$_SESSION['password']="";
+			$_SESSION['passWord']="";
+			$_SESSION['userName']="";
 		}
 	}
 }
@@ -101,7 +107,7 @@ if($currentPage=="businessContacts"){
 		?>
 		
 	</head>
-	<header><?php if ($_SESSION['password']!=""&&$_SESSION['userName']!=""){echo "Welcome".$_SESSION['userName']; else {echo "<a href='login.php'>Login</a>";}}?></header>
+	<header><?php if (!empty($_SESSION['userName'])){echo "Welcome".$_SESSION['userName']." <a href='login.php'>Sign Out</a>";} else {echo "<a href='login.php'>Login</a>";}?></header>
 	<body>
 		<?php if($isMobile){?>
 			<button id='toggleNav'>Show/Hide Navigation</button>
